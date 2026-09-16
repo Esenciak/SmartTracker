@@ -24,6 +24,17 @@ builder.Services.AddHttpsRedirection(options =>
 	options.HttpsPort = 7203;
 });
 
+
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("AllowBlazorClient", policy =>
+	{
+		policy.WithOrigins("https://localhost:7255")
+			  .AllowAnyMethod()
+			  .AllowAnyHeader();
+	});
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,6 +48,9 @@ if (app.Environment.IsDevelopment())
 		option.WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
 	});
 }
+
+
+app.UseCors("AllowBlazorClient");
 
 app.UseHttpsRedirection();
 
