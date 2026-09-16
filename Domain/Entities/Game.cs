@@ -1,4 +1,7 @@
-﻿namespace Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
+
+namespace Domain.Entities
 {
 	public class Game
 	{
